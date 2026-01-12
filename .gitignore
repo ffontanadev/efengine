@@ -1,0 +1,147 @@
+# Build Outputs
+bin/
+obj/
+x64/
+x86/
+Win32/
+Debug/
+Release/
+RelWithDebInfo/
+MinSizeRel/
+
+# Visual Studio
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vcxproj.user
+*.vcxproj.filters
+
+# Compiled Files
+*.exe
+*.dll
+*.so
+*.dylib
+*.lib
+*.a
+*.obj
+*.o
+*.pdb
+*.ilk
+*.exp
+*.idb
+*.log
+*.tlog
+
+# Intermediate Files
+*.pch
+*.ipch
+*.aps
+*.ncb
+*.opendb
+*.opensdf
+*.sdf
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Build Results
+[Bb]uild/
+[Bb]uilds/
+ipch/
+*.sbr
+*.bsc
+*.tlb
+*.tlh
+*.tmp
+*.tmp_proj
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# Profiler Results
+*.psess
+*.vsp
+*.vspx
+*.sap
+
+# Test Results
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# NCrunch
+_NCrunch_*
+.*crunch*.local.xml
+nCrunchTemp_*
+
+# Backup Files
+*.bak
+*.backup
+*~
+*.swp
+*.swo
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+*.tlog/
+
+# Package Manager
+packages/
+!packages/repositories.config
+
+# CMake (if you add it later)
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+cmake-build-*/
+
+# Rider
+.idea/
+
+# Temporary files
+*.tmp
+*.cache
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+
+# Build folders
+[Bb]uild/
+[Oo]ut/
+
+# ASan/Sanitizer outputs
+*.dmp
+*.stackdump
+
+# ImGui ini files (user preferences)
+imgui.ini
+
+# Custom engine logs (when you implement logging)
+*.log
+engine.log
+debug.log
+
+.claude

@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="efengine/efengine.vcxproj" Id="a984ef5b-3df5-4c3f-ad4a-93335ac67edc" />
+</Solution>
