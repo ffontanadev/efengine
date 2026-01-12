@@ -58,7 +58,7 @@ int main() {
 	std::cout << "[GLAD] OpenGL loaded successfully" << std::endl;
 	std::cout << "[OpenGL] Version: " << glGetString(GL_VERSION) << std::endl;
 
-	
+
 	gameLoop(window_instance);
 	
 	glfwDestroyWindow(window_instance);

@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\callbacks.cpp" />
+    <ClCompile Include="src\core\callbacks.cpp" />
     <ClCompile Include="src\core\gameloop.cpp" />
     <ClCompile Include="src\core\Timer.cpp" />
     <ClCompile Include="src\glad.c" />
