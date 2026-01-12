@@ -9,11 +9,13 @@ namespace efengine {
 static void error_callback(int error, const char* description);
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
+// Constructor
 Application::Application()
     : m_initialized(false)
 {
 }
 
+// Deconstructor
 Application::~Application() {
     Shutdown();
 }
@@ -34,7 +36,7 @@ bool Application::Initialize() {
     }
 
     // Step 2: Create Window
-    if (!m_window.Create(1280, 720, "My game")) {
+    if (!m_window.Create(1280, 720, "EFE ENGINE")) {
         glfwTerminate();
         return false;
     }
