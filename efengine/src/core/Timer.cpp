@@ -18,3 +18,5 @@ double Timer::getDeltaTime() {
 void Timer::reset() {
     m_lastTime = glfwGetTime();
 }
+
+

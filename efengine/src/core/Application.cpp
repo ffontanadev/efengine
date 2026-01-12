@@ -58,17 +58,33 @@ void Application::Run() {
     std::cout << "[GAME] MAIN LOOP BEGIN" << std::endl;
 
     Timer timer;
+    const double FIXED_TIMESTEP = 1.0 / 60.0;  // 60 updates per second (16.67ms)
+    double accumulator = 0.0;
 
     // Main game loop
     while (!m_window.ShouldClose()) {
         double deltaTime = timer.getDeltaTime();
 
+        // Clamp delta to prevent SPIRAL OF DEATH
+        if (deltaTime > 0.25) {
+            deltaTime = 0.25;  // Max 250ms
+        }
+
+        accumulator += deltaTime;
+
+        while (accumulator >= FIXED_TIMESTEP) {
+            // update(FIXED_TIMESTEP);  // Always 16.67ms
+            accumulator -= FIXED_TIMESTEP;
+        }
+        
+        double alpha = accumulator / FIXED_TIMESTEP;
+        //render(alpha);
+
         // Process input
         m_input.ProcessInput(m_window.GetHandle());
         m_window.PollEvents();
 
-        // Update game logic (placeholder for future)
-        // update(deltaTime);
+
 
         // Render
         m_renderer.Clear(0.1f, 0.1f, 0.15f, 1.0f);
