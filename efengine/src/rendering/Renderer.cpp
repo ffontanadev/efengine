@@ -1,8 +1,8 @@
 #define GLFW_INCLUDE_NONE
 #include "rendering/Renderer.h"
+#include "core/Logger.h"
 #include "glad/glad.h"
 #include <GLFW/glfw3.h>
-#include <iostream>
 
 namespace efengine {
 
@@ -17,18 +17,17 @@ Renderer::~Renderer() {
 
 bool Renderer::Initialize(GLFWwindow* window) {
     if (m_initialized) {
-        std::cout << "[RENDERER] Already initialized" << std::endl;
+        LOG_WARN() << "Renderer already initialized";
         return true;
     }
 
-    // Load OpenGL using GLAD
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        std::cout << "[GLAD] Failed to initialize OpenGL context" << std::endl;
+        LOG_FATAL() << "Failed to initialize OpenGL context (GLAD)";
         return false;
     }
 
-    std::cout << "[GLAD] OpenGL loaded successfully" << std::endl;
-    std::cout << "[OpenGL] Version: " << glGetString(GL_VERSION) << std::endl;
+    LOG_INFO() << "OpenGL loaded successfully (GLAD)";
+    LOG_INFO() << "OpenGL Version: " << (const char*)glGetString(GL_VERSION);
 
     m_initialized = true;
     return true;
@@ -49,7 +48,7 @@ void Renderer::SetViewport(int width, int height) {
 
 void Renderer::OnResize(int width, int height) {
     SetViewport(width, height);
-    std::cout << "[WINDOW] Resized to " << width << "x" << height << std::endl;
+    LOG_INFO() << "Window resized to " << width << "x" << height;
 }
 
 } // namespace efengine

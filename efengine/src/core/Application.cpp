@@ -1,7 +1,7 @@
 #include "core/Application.h"
+#include "core/Logger.h"
 #include "core/Timer.h"
 #include <GLFW/glfw3.h>
-#include <iostream>
 
 namespace efengine {
 
@@ -21,6 +21,11 @@ Application::~Application() {
 bool Application::Initialize() {
     if (m_initialized) {
         return true;
+    }
+
+    // Step 0: Initialize Logger (FIRST - so we can log everything else)
+    if (!Logger::Get().Initialize("engine.log")) {
+        return false;
     }
 
     // Step 1: Initialize GLFW
@@ -45,55 +50,46 @@ bool Application::Initialize() {
     SetupCallbacks();
 
     m_initialized = true;
-    std::cout << "[APPLICATION] Initialized successfully" << std::endl;
+    LOG_INFO() << "Application initialized successfully";
     return true;
 }
 
 void Application::Run() {
     if (!m_initialized) {
-        std::cout << "[APPLICATION] Cannot run - not initialized" << std::endl;
+        LOG_ERROR() << "Cannot run - Application not initialized";
         return;
     }
 
-    std::cout << "[GAME] MAIN LOOP BEGIN" << std::endl;
+    LOG_INFO() << "Main loop started";
 
     Timer timer;
-    const double FIXED_TIMESTEP = 1.0 / 60.0;  // 60 updates per second (16.67ms)
+    const double FIXED_TIMESTEP = 1.0 / 60.0;
     double accumulator = 0.0;
 
-    // Main game loop
     while (!m_window.ShouldClose()) {
         double deltaTime = timer.getDeltaTime();
 
-        // Clamp delta to prevent SPIRAL OF DEATH
         if (deltaTime > 0.25) {
-            deltaTime = 0.25;  // Max 250ms
+            deltaTime = 0.25;
         }
 
         accumulator += deltaTime;
 
         while (accumulator >= FIXED_TIMESTEP) {
-            // update(FIXED_TIMESTEP);  // Always 16.67ms
             accumulator -= FIXED_TIMESTEP;
         }
-        
-        double alpha = accumulator / FIXED_TIMESTEP;
-        //render(alpha);
 
-        // Process input
+        double alpha = accumulator / FIXED_TIMESTEP;
+        (void)alpha; // Suppress unused warning for now
+
         m_input.ProcessInput(m_window.GetHandle());
         m_window.PollEvents();
 
-
-
-        // Render
         m_renderer.Clear(0.1f, 0.1f, 0.15f, 1.0f);
-
-        // Swap buffers
         m_window.SwapBuffers();
     }
 
-    std::cout << "[GAME] MAIN LOOP END" << std::endl;
+    LOG_INFO() << "Main loop ended";
 }
 
 void Application::Shutdown() {
@@ -106,35 +102,32 @@ void Application::Shutdown() {
     glfwTerminate();
 
     m_initialized = false;
-    std::cout << "[APPLICATION] Shutdown complete" << std::endl;
+    LOG_INFO() << "Application shutdown complete";
+
+    Logger::Get().Shutdown();
 }
 
 bool Application::InitializeGLFW() {
     if (!glfwInit()) {
-        std::cout << "[GLFW] NOT INITIALIZED" << std::endl;
+        LOG_FATAL() << "GLFW initialization failed";
         return false;
     }
 
-    std::cout << "[GLFW] Initialized successfully" << std::endl;
+    LOG_INFO() << "GLFW initialized successfully";
     glfwSetErrorCallback(error_callback);
     return true;
 }
 
 void Application::SetupCallbacks() {
-    // Set window user pointer to renderer for callbacks
     glfwSetWindowUserPointer(m_window.GetHandle(), &m_renderer);
-
-    // Setup framebuffer size callback
     m_window.SetFramebufferSizeCallback(framebuffer_size_callback);
 }
 
-// Static callback functions
 static void error_callback(int error, const char* description) {
-    std::cout << "[GLFW] Error " << error << ": " << description << std::endl;
+    LOG_ERROR() << "GLFW Error " << error << ": " << description;
 }
 
 static void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-    // Get renderer from window user pointer
     efengine::Renderer* renderer = static_cast<efengine::Renderer*>(glfwGetWindowUserPointer(window));
     if (renderer) {
         renderer->OnResize(width, height);
