@@ -139,16 +139,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\core\Application.cpp" />
     <ClCompile Include="src\core\callbacks.cpp" />
     <ClCompile Include="src\core\gameloop.cpp" />
     <ClCompile Include="src\core\Timer.cpp" />
+    <ClCompile Include="src\core\Window.cpp" />
     <ClCompile Include="src\glad.c" />
+    <ClCompile Include="src\input\InputManager.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\rendering\Renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\core\Application.h" />
     <ClInclude Include="include\core\callbacks.h" />
     <ClInclude Include="include\core\gameloop.h" />
     <ClInclude Include="include\core\Timer.h" />
+    <ClInclude Include="include\core\Window.h" />
+    <ClInclude Include="include\input\InputManager.h" />
+    <ClInclude Include="include\rendering\Renderer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
